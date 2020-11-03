@@ -1,0 +1,27 @@
+package com.lianda.movies.data.api.interceptor
+
+import android.app.Application
+import com.lianda.movies.BuildConfig
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
+import java.io.IOException
+
+class HeaderInterceptor (
+    private val application: Application):Interceptor{
+
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = mapHeaders(chain)
+        return chain.proceed(request)
+    }
+
+    private fun mapHeaders(chain: Interceptor.Chain):Request{
+        val original = chain.request()
+        val requestBuilder = original.newBuilder()
+            .addHeader("X-Api-Key",BuildConfig.API_KEY)
+        return requestBuilder.build()
+    }
+
+
+}
