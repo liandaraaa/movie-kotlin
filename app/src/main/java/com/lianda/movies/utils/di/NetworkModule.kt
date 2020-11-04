@@ -18,7 +18,7 @@ val networkModule = module {
 
     single { provideLoggingInterceptor() }
 
-    single { provideOkHttpClient(get(), get(), get(), get()) }
+    single { provideOkHttpClient(get(), get(), get()) }
 
     single { provideRetrofit(get(), get()) }
 }
@@ -44,7 +44,7 @@ fun provideRetrofit(
 }
 
 fun provideOkHttpClient(
-    cache: Cache, application: Application, loggingInterceptor: HttpLoggingInterceptor, basicAuth: String
+    cache: Cache, application: Application, loggingInterceptor: HttpLoggingInterceptor
 ): OkHttpClient {
 
     val spec = ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS).tlsVersions(TlsVersion.TLS_1_2)

@@ -3,7 +3,7 @@ package com.lianda.movies.base
 import android.app.Application
 import com.lianda.movies.utils.di.apiModule
 import com.lianda.movies.utils.di.dbModule
-import com.lianda.movies.utils.di.featuremodule.cityModule
+import com.lianda.movies.utils.di.featuremodule.movieModule
 import com.lianda.movies.utils.di.networkModule
 import com.lianda.movies.utils.di.preferenceModule
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +22,7 @@ class BaseApplication : Application(){
                     dbModule,
                     preferenceModule,
                     apiModule,
-                    cityModule
+                    movieModule
                 )
             )
         }

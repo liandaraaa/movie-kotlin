@@ -1,11 +1,11 @@
 package com.lianda.movies.utils.di
 
-import com.lianda.movies.data.api.remote.CityApi
+import com.lianda.movies.data.api.remote.MovieApi
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val apiModule = module {
-    single { provideCityApi(get()) }
+    single { provideMovieApi(get()) }
 }
 
-fun provideCityApi(retrofit: Retrofit):CityApi = retrofit.create(CityApi::class.java)
+fun provideMovieApi(retrofit: Retrofit):MovieApi = retrofit.create(MovieApi::class.java)

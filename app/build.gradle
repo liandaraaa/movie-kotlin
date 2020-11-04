@@ -37,14 +37,20 @@ android {
         production {
             dimension "default"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "SERVER_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"5ecd2fad8e814fb2a6c1ef65acb54b37"'
+            buildConfigField "String", "SERVER_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "SERVER_IMAGE_URL", '"https://image.tmdb.org/t/p/original/"'
+            buildConfigField "String", "SERVER_YOUTUBE_URL", '"https://www.youtube.com/watch?v="'
+            buildConfigField "String", "API_KEY", '"306ccc27807f6de9adbf95b869018380"'
+            buildConfigField "String", "ACCESS_TOKEN", '"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDZjY2MyNzgwN2Y2ZGU5YWRiZjk1Yjg2OTAxODM4MCIsInN1YiI6IjU5MjA0OGY4YzNhMzY4Nzc0ZTA0OGU2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IrrqsvnSt8hpMad505qWFfhhJtLBaAqvLui2XCcxx0U"'
         }
         development {
             dimension "default"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "SERVER_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"5ecd2fad8e814fb2a6c1ef65acb54b37"'
+            buildConfigField "String", "SERVER_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "SERVER_IMAGE_URL", '"https://image.tmdb.org/t/p/original/"'
+            buildConfigField "String", "SERVER_YOUTUBE_URL", '"https://www.youtube.com/watch?v="'
+            buildConfigField "String", "API_KEY", '"306ccc27807f6de9adbf95b869018380"'
+            buildConfigField "String", "ACCESS_TOKEN", '"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDZjY2MyNzgwN2Y2ZGU5YWRiZjk1Yjg2OTAxODM4MCIsInN1YiI6IjU5MjA0OGY4YzNhMzY4Nzc0ZTA0OGU2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IrrqsvnSt8hpMad505qWFfhhJtLBaAqvLui2XCcxx0U"'
         }
     }
 

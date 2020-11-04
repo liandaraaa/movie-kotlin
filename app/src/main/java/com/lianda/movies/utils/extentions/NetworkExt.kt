@@ -8,6 +8,7 @@ import com.lianda.movies.utils.common.ApiErrorOperator
 import com.lianda.movies.utils.common.ResultState
 import okhttp3.ResponseBody
 import retrofit2.HttpException
+import retrofit2.Response
 
 fun hasNetwork(context: Context): Boolean {
     var result = false
@@ -44,11 +45,11 @@ fun hasNetwork(context: Context): Boolean {
     return result
 }
 
-fun <T: Any> handleApiSuccess(message: String,  data: T) : ResultState.Success<T>{
+fun <T: Any> handleApiSuccess(message: String = "",  data: T) : ResultState.Success<T>{
     return ResultState.Success(data, message)
 }
 
-fun  <T : Any> handleApiError(exception: java.lang.Exception): ResultState.Error<T> {
+fun  <T : Any> handleApiError(exception: java.lang.Exception): ResultState.Error {
    return when(exception){
         is HttpException -> {
             if (exception.code() == 504){
@@ -63,11 +64,11 @@ fun  <T : Any> handleApiError(exception: java.lang.Exception): ResultState.Error
     }
 }
 
-fun <T : Any> handleApiError(errorBody: ResponseBody?): ResultState.Error<T> {
-    val error = ApiErrorOperator.parseError(errorBody)
-    if(error.code.isEmpty()){
-        return ResultState.Error(Throwable(error.error))
+fun <T : Any> handleApiError(response:Response<T>): ResultState.Error {
+    val error = ApiErrorOperator.parseError(response)
+    if(error.statusMessage.isEmpty()){
+        return ResultState.Error(Exception(error.statusMessage))
     }
-    return ResultState.Error(Throwable(error.message))
+    return ResultState.Error(Throwable(error.statusMessage))
 }
 

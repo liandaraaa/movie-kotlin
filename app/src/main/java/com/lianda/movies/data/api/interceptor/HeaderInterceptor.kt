@@ -19,7 +19,8 @@ class HeaderInterceptor (
     private fun mapHeaders(chain: Interceptor.Chain):Request{
         val original = chain.request()
         val requestBuilder = original.newBuilder()
-            .addHeader("X-Api-Key",BuildConfig.API_KEY)
+            .addHeader("Authorization",BuildConfig.ACCESS_TOKEN)
+            .addHeader("Content-Type","application/json;charset=utf-8")
         return requestBuilder.build()
     }
 
