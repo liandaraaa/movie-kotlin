@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="sample_vote">4.4</string>
+    <string name="sample_movie_name">Dark Killer</string>
+    <string name="sample_date">11 November 2020</string>
+    <string name="action_retry">Ulangi</string>
+    <string name="label_oops">Oops..</string>
 </resources>

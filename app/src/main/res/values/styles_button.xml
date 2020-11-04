@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="MovieButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="elevation">@dimen/dimen_0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:padding">@dimen/dimen_15dp</item>
+    </style>
+
+    <style name="MovieButton.Large">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">@dimen/dimen_15dp</item>
+    </style>
+
+    <style name="MovieButton.Medium">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">@dimen/dimen_12dp</item>
+    </style>
+
+    <style name="MovieButton.Large.Square">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">@dimen/dimen_15dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+
+
+    <style name="KecipirButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="elevation">@dimen/dimen_0dp</item>
+        <item name="android:padding">@dimen/dimen_15dp</item>
+    </style>
+
+    <style name="KecipirButtonOutlined.Medium">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">@dimen/dimen_12dp</item>
+    </style>
+
+    <style name="KecipirButtonOutlined.Red">
+        <item name="strokeColor">#FF5555</item>
+        <item name="android:textColor">#FF5555</item>
+    </style>
+
+    <style name="KecipirTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#15B065</item>
+    </style>
+
+    <style name="KecipirTextButton.Primary">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+</resources>

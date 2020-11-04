@@ -10,14 +10,17 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel (private val useCase: MovieUseCase): ViewModel() {
 
-    fun fetchMovies(): MutableLiveData<ResultState<List<Movie>>>{
-        val fetchMovies = MutableLiveData<ResultState<List<Movie>>>()
+    private val fetchMovies = MutableLiveData<ResultState<List<Movie>>>()
+    
+    init {
+        fetchMovies.value = ResultState.Loading()
+    }
 
+    fun fetchMovies(): MutableLiveData<ResultState<List<Movie>>>{
         viewModelScope.launch {
             val movieResponse = useCase.fetchMovies()
             fetchMovies.value = movieResponse
         }
-
         return fetchMovies
     }
 }
