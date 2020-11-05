@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lianda.movies.domain.model.EndlessMovie
 import com.lianda.movies.domain.model.Movie
 import com.lianda.movies.domain.model.Review
 import com.lianda.movies.domain.model.Video
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel (private val useCase: MovieUseCase): ViewModel() {
 
-    private val fetchMovies = MutableLiveData<ResultState<List<Movie>>>()
+    private val fetchMovies = MutableLiveData<ResultState<EndlessMovie>>()
     private val fetchMovieDetail = MutableLiveData<ResultState<Movie>>()
     private val fetchVideoTrailer = MutableLiveData<ResultState<Video>>()
     private val fetchReviews = MutableLiveData<ResultState<List<Review>>>()
@@ -25,9 +26,9 @@ class MovieViewModel (private val useCase: MovieUseCase): ViewModel() {
         fetchReviews.value = ResultState.Loading()
     }
 
-    fun fetchMovies(): LiveData<ResultState<List<Movie>>>{
+    fun fetchMovies(page:Int): LiveData<ResultState<EndlessMovie>>{
         viewModelScope.launch {
-            val movieResponse = useCase.fetchMovies()
+            val movieResponse = useCase.fetchMovies(page)
             fetchMovies.value = movieResponse
         }
         return fetchMovies

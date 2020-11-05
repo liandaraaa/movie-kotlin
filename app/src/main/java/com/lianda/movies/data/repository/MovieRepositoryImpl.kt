@@ -1,6 +1,7 @@
 package com.lianda.movies.data.repository
 
 import com.lianda.movies.data.api.remote.MovieApi
+import com.lianda.movies.domain.model.EndlessMovie
 import com.lianda.movies.domain.model.Movie
 import com.lianda.movies.domain.model.Review
 import com.lianda.movies.domain.model.Video
@@ -13,13 +14,17 @@ import kotlinx.coroutines.withContext
 
 class MovieRepositoryImpl (private val api: MovieApi): MovieRepository {
 
-    override suspend fun fetchMovies(): ResultState<List<Movie>> {
+    override suspend fun fetchMovies(page:Int): ResultState<EndlessMovie> {
         return try {
-            val response = api.fetchMovies()
+            val response = api.fetchMovies(page)
             if (response.isSuccessful){
                 response.body()?.let {
                     withContext(Dispatchers.IO){
-                        handleApiSuccess(data = it.movieSourceApis?.map { it.toMovie() }.orEmpty())
+                        val endlessMovie = EndlessMovie(
+                            totalPage = it.totalPages ?: 0,
+                            movies =  it.movieSourceApis?.map { it.toMovie() }.orEmpty()
+                        )
+                        handleApiSuccess(data = endlessMovie)
                     }
                 } ?: handleApiError(response)
             }else{

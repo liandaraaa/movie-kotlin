@@ -1,8 +1,11 @@
 package com.lianda.movies.presentation.main
 
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lianda.movies.R
 import com.lianda.movies.base.BaseActivity
+import com.lianda.movies.base.BaseEndlessRecyclerViewAdapter
+import com.lianda.movies.domain.model.EndlessMovie
 import com.lianda.movies.domain.model.Movie
 import com.lianda.movies.presentation.adapter.MovieAdapter
 import com.lianda.movies.presentation.movie.MovieDetailActivity
@@ -12,19 +15,39 @@ import com.lianda.movies.utils.extentions.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), BaseEndlessRecyclerViewAdapter.OnLoadMoreListener {
 
     private val movieViewModel: MovieViewModel by viewModel()
 
-    private val movieAdapter: MovieAdapter by lazy {
-        MovieAdapter(this, listOf()) { movie ->
-            MovieDetailActivity.start(this, movie)
-        }
-    }
+    private var movieAdapter: MovieAdapter? = null
+
+    private var isLoadMore = false
+
+    private var currentPage = 1
+    private var totalPages = 0
 
     override val layout: Int = R.layout.activity_main
 
     override fun onPreparation() {
+        if (movieAdapter == null){
+            val gridLayoutManager = GridLayoutManager(this@MainActivity, 2)
+            movieAdapter = MovieAdapter(this, mutableListOf()){movie->
+                MovieDetailActivity.start(this,movie)
+            }
+            movieAdapter?.apply{
+                page = currentPage
+                totalPage = totalPages
+                layoutManager = gridLayoutManager
+                onLoadMoreListener = this@MainActivity
+                recyclerView = rvMovies
+            }
+
+            rvMovies.apply {
+                layoutManager = gridLayoutManager
+                adapter = movieAdapter
+            }
+        }
+
     }
 
     override fun onIntent() {
@@ -32,7 +55,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onUi() {
-        setupMovies()
     }
 
     override fun onAction() {
@@ -43,25 +65,22 @@ class MainActivity : BaseActivity() {
         observeMovies()
     }
 
-    private fun setupMovies() {
-        rvMovies.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 2)
-            adapter = movieAdapter
-        }
-    }
-
     private fun observeMovies() {
         observe(
-            liveData = movieViewModel.fetchMovies(),
+            liveData = movieViewModel.fetchMovies(currentPage),
             action = ::manageStateMovie
         )
     }
 
-    private fun manageStateMovie(result: ResultState<List<Movie>>) {
+    private fun manageStateMovie(result: ResultState<EndlessMovie>) {
         when (result) {
             is ResultState.Success -> {
                 msvMovie.showContentView()
-                movieAdapter.notifyDataAddOrUpdate(result.data)
+                isLoadMore = false
+                movieAdapter?.setLoadMoreProgress(false)
+                totalPages = result.data.totalPage
+                movieAdapter?.totalPage = totalPages
+                movieAdapter?.notifyAddOrUpdateChanged(result.data.movies)
             }
             is ResultState.Error -> {
                 msvMovie.showErrorView(
@@ -77,14 +96,33 @@ class MainActivity : BaseActivity() {
             is ResultState.Loading -> {
                 msvMovie.showLoadingView()
             }
-            is ResultState.Empty ->{
-                msvMovie.showEmptyView(
-                    icon = R.drawable.ic_empty,
-                    title = getString(R.string.label_oops),
-                    message = getString(R.string.message_empty_movies)
-                )
+            is ResultState.Empty -> {
+                if (isLoadMore) {
+                    Log.d("lotmor", "lotmore empty false")
+                    isLoadMore = false
+                    movieAdapter?.setLoadMoreProgress(false)
+                    movieAdapter?.removeScrollListener()
+                } else {
+                    Log.d("lotmor", "lotmore empty true")
+                    movieAdapter?.datas?.clear()
+                    msvMovie.showEmptyView(
+                        icon = R.drawable.ic_empty,
+                        title = getString(R.string.label_oops),
+                        message = getString(R.string.message_empty_movies)
+                    )
+                }
+
             }
         }
+    }
+
+    override fun onLoadMore() {
+        Log.d("Lotmor", "triggered")
+        isLoadMore = true
+        movieAdapter?.setLoadMoreProgress(true)
+        currentPage += 1
+        movieAdapter?.page = currentPage
+        observeMovies()
     }
 
 }

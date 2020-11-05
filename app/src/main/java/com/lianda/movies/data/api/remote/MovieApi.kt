@@ -7,11 +7,12 @@ import com.lianda.movies.data.api.sourceapi.VideoListSourceApi
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApi {
 
     @GET("discover/movie")
-    suspend fun fetchMovies() : Response<MovieListSourceApi>
+    suspend fun fetchMovies(@Query("page") page:Int) : Response<MovieListSourceApi>
 
     @GET("movie/{id}")
     suspend fun fetchMovieDetail(@Path("id") movieId:Int) : Response<MovieSourceApi>
