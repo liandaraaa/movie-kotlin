@@ -1,4 +1,4 @@
-package com.lianda.movies.data.api.entities
+package com.lianda.movies.data.api.sourceapi
 
 
 import com.google.gson.annotations.SerializedName

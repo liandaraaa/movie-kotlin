@@ -1,9 +1,9 @@
 package com.lianda.movies.data.api.remote
 
-import com.lianda.movies.data.api.entities.MovieListSourceApi
-import com.lianda.movies.data.api.entities.MovieSourceApi
-import com.lianda.movies.data.api.entities.ReviewListSourceApi
-import com.lianda.movies.data.api.entities.VideoListSourceApi
+import com.lianda.movies.data.api.sourceapi.MovieListSourceApi
+import com.lianda.movies.data.api.sourceapi.MovieSourceApi
+import com.lianda.movies.data.api.sourceapi.ReviewListSourceApi
+import com.lianda.movies.data.api.sourceapi.VideoListSourceApi
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

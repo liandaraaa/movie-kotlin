@@ -2,8 +2,7 @@ package com.lianda.movies.utils.common
 
 import android.util.Log
 import com.google.gson.GsonBuilder
-import com.lianda.movies.data.api.entities.ErrorSourceApi
-import okhttp3.ResponseBody
+import com.lianda.movies.data.api.sourceapi.ErrorSourceApi
 import retrofit2.Response
 import java.io.IOException
 

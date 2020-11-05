@@ -2,13 +2,8 @@ package com.lianda.movies.presentation.movie
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.lianda.movies.R
 import com.lianda.movies.base.BaseActivity
 import com.lianda.movies.domain.model.Movie
@@ -36,8 +31,6 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private val movieViewModel: MovieViewModel by viewModel()
-
-    private val videoPlayer: SimpleExoPlayer by lazy { SimpleExoPlayer.Builder(this).build() }
 
     private val reviewAdapter: ReviewAdapter by lazy { ReviewAdapter(this, listOf()) }
 
@@ -92,7 +85,7 @@ class MovieDetailActivity : BaseActivity() {
 
         pvTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(data.yotubeKey, 0f)
+                youTubePlayer.loadVideo(data.youtubeKey, 0f)
             }
         })
     }
@@ -103,12 +96,6 @@ class MovieDetailActivity : BaseActivity() {
             layoutManager = LinearLayoutManager(this@MovieDetailActivity)
             adapter = reviewAdapter
         }
-    }
-
-    private fun buildMediaSource(data: Video): MediaSource? {
-        val dataSourceFactory = DefaultDataSourceFactory(this, "movie")
-        return ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(Uri.parse(data.url))
     }
 
     private fun observeMovieDetail() {
@@ -212,23 +199,6 @@ class MovieDetailActivity : BaseActivity() {
                 )
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        videoPlayer.playWhenReady = true
-    }
-
-    override fun onStop() {
-        super.onStop()
-        videoPlayer.playWhenReady = false
-        if (isFinishing) {
-            releasePlayer()
-        }
-    }
-
-    private fun releasePlayer() {
-        videoPlayer.release()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

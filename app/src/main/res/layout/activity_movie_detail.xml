@@ -331,6 +331,8 @@
                         android:id="@+id/pvTrailer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:autoPlay="false"
+                        app:showFullScreenButton="false"
                         android:layout_marginStart="@dimen/dimen_16dp"
                         android:layout_marginLeft="@dimen/dimen_16dp"
                         android:layout_marginTop="@dimen/dimen_8dp"

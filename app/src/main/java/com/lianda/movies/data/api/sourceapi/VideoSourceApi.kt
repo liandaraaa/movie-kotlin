@@ -1,8 +1,7 @@
-package com.lianda.movies.data.api.entities
+package com.lianda.movies.data.api.sourceapi
 
 
 import com.google.gson.annotations.SerializedName
-import com.lianda.movies.BuildConfig
 import com.lianda.movies.domain.model.Video
 
 data class VideoSourceApi(
@@ -27,10 +26,7 @@ data class VideoSourceApi(
     fun toVideo():Video{
         return Video(
             id = id.orEmpty(),
-            url = getVideo(key.orEmpty()),
-            yotubeKey = key.orEmpty()
+            youtubeKey = key.orEmpty()
         )
     }
-
-    private fun getVideo(key:String) = BuildConfig.SERVER_YOUTUBE_URL+key
 }
