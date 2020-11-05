@@ -16,4 +16,10 @@
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_34dp">34dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="text_size_8sp">8sp</dimen>
+    <dimen name="text_size_10sp">10sp</dimen>
 </resources>

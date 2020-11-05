@@ -5,6 +5,8 @@
         <item name="fontFamily">@font/mukta_vaani</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
 
     <style name="MovieTextView.Body">
@@ -27,8 +29,32 @@
         <item name="fontFamily">@font/mukta_vaani_semibold</item>
     </style>
 
+    <style name="MovieTextView.Medium">
+        <item name="fontFamily">@font/mukta_vaani_medium</item>
+    </style>
+
     <style name="MovieTextView.Grey">
         <item name="android:textColor">@color/colorGrey</item>
+    </style>
+
+    <style name="MovieTextView.White">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="MovieTextView.Primary">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="MovieTextView.Transparent">
+        <item name="android:textColor">@color/colorTransparent</item>
+    </style>
+
+    <style name="MovieTextView.White.SemiBold">
+        <item name="fontFamily">@font/mukta_vaani_semibold</item>
+    </style>
+
+    <style name="MovieTextView.Primary.SemiBold">
+        <item name="fontFamily">@font/mukta_vaani_semibold</item>
     </style>
 
 </resources>

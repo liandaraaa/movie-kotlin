@@ -3,5 +3,6 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/mukta_vaani</item>
         <item>@font/mukta_vaani_bold</item>
+        <item>@font/mukta_vaani_medium</item>
     </array>
 </resources>

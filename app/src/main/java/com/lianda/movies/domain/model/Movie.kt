@@ -1,8 +1,12 @@
-package com.lianda.movies.domain.entities
+package com.lianda.movies.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
     val backdropPath: String,
-    val genres: List<String>,
+    val genres: String,
     val id: Int,
     val overview: String,
     val originalLanguage: String,
@@ -15,4 +19,4 @@ data class Movie(
     val title: String,
     val video: Boolean,
     val voteAverage: Double
-)
+) : Parcelable

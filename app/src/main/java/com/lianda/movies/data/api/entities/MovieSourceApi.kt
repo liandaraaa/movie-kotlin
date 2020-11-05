@@ -3,7 +3,8 @@ package com.lianda.movies.data.api.entities
 
 import com.google.gson.annotations.SerializedName
 import com.lianda.movies.BuildConfig
-import com.lianda.movies.domain.entities.Movie
+import com.lianda.movies.domain.model.Movie
+import com.lianda.movies.utils.extentions.convertStringDateToAnotherStringDate
 
 data class MovieSourceApi(
     @SerializedName("backdrop_path")
@@ -36,16 +37,20 @@ data class MovieSourceApi(
     val voteAverage: Double?
 ){
 
-    fun toMovie():Movie{
+    fun toMovie(): Movie {
         return Movie(
             backdropPath = getImage(backdropPath.orEmpty()),
-            genres = genreSourceApis?.map { it.name }.orEmpty(),
+            genres = genreSourceApis?.map { it.name }.orEmpty().joinToString(","),
             id = id ?: 0,
             overview = overview.orEmpty(),
             posterPath = getImage(posterPath.orEmpty()),
             popularity = popularity ?: 0.0,
             originalLanguage = originalLanguage.orEmpty(),
-            releaseDate = releaseDate.orEmpty(),
+            releaseDate = convertStringDateToAnotherStringDate(
+                stringDate = releaseDate.orEmpty(),
+                stringDateFormat = "yyyy-MM-dd",
+                returnDateFormat = "dd MMMM yyyy"
+            ),
             runtime = runtime ?: 0,
             status = status.orEmpty(),
             tagline = tagline.orEmpty(),
@@ -56,6 +61,4 @@ data class MovieSourceApi(
     }
 
     fun getImage(fileName:String) = BuildConfig.SERVER_IMAGE_URL+fileName
-
-    fun getVideo(fileName:String) = BuildConfig.SERVER_YOUTUBE_URL+fileName
 }

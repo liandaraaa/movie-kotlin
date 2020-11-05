@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/MovieToolbar.White"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleTextAppearance="@style/MovieTextView.Transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:background="@color/colorWhite"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/imgMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentEnd="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
+
+                <ProgressBar
+                    android:id="@+id/pbPoster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgMovie"
+                    app:layout_constraintEnd_toEndOf="@+id/imgMovie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratMovie"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:numStars="5"
+                    android:progress="3"
+                    android:progressTint="@color/colorYellow"
+                    android:rating="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvVote"
+                    style="@style/MovieTextView.SubHeader.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="@string/sample_vote"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTitle"
+                    style="@style/MovieTextView.SubHeader.Bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/ratMovie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgMovie"
+                    tools:text="@string/sample_movie_name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDate"
+                    style="@style/MovieTextView.Grey"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ratMovie"
+                    app:layout_constraintStart_toStartOf="@+id/tvTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    tools:text="@string/sample_date" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:background="@color/colorGrey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:navigationIcon="@drawable/ic_white_back" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.lianda.movies.utils.custom.CustomMultiStateView
+                android:id="@+id/msvMovieDetail"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorView="@layout/layout_dialog"
+                app:loadingView="@layout/layout_loading"
+                app:viewState="loading">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelInformation"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_information"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelOriginalLanguage"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_original_language"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLabelInformation"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelStatus"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_status"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelOriginalLanguage"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelDuration"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_duration"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelStatus"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelGenre"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_genre"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelDuration"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelDescription"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_overview"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelGenre"
+                        app:textAllCaps="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDescription"
+                        style="@style/MovieTextView.Primary.SemiBold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:ellipsize="end"
+                        android:maxLines="8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelDescription"
+                        tools:text="@tools:sample/lorem/random" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvOriginalLanguage"
+                        style="@style/MovieTextView.Primary.SemiBold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:gravity="end"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvLabelOriginalLanguage"
+                        app:layout_constraintTop_toBottomOf="@+id/tvLabelInformation"
+                        tools:text="@string/sample_original_language" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvStatus"
+                        style="@style/MovieTextView.Primary.SemiBold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:gravity="end"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvLabelDuration"
+                        app:layout_constraintTop_toBottomOf="@+id/tvOriginalLanguage"
+                        tools:text="@string/sample_status" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDuration"
+                        style="@style/MovieTextView.Primary.SemiBold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:gravity="end"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvLabelGenre"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+                        tools:text="@string/sample_duration" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvGenre"
+                        style="@style/MovieTextView.Primary.SemiBold"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:gravity="end"
+                        android:textAllCaps="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvLabelGenre"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDuration"
+                        tools:text="@string/sample_genre" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.lianda.movies.utils.custom.CustomMultiStateView>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@color/colorGreyTwo" />
+
+            <com.lianda.movies.utils.custom.CustomMultiStateView
+                android:id="@+id/msvTrailer"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyView="@layout/layout_dialog"
+                app:errorView="@layout/layout_dialog"
+                app:loadingView="@layout/layout_loading"
+                app:viewState="loading">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelTrailer"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_trailer"
+                        app:textAllCaps="true" />
+
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                        android:id="@+id/pvTrailer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginRight="@dimen/dimen_16dp" />
+
+                </LinearLayout>
+
+            </com.lianda.movies.utils.custom.CustomMultiStateView>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@color/colorGreyTwo" />
+
+            <com.lianda.movies.utils.custom.CustomMultiStateView
+                android:id="@+id/msvReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                app:emptyView="@layout/layout_dialog"
+                app:errorView="@layout/layout_dialog"
+                app:loadingView="@layout/layout_loading"
+                app:viewState="loading">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelReview"
+                        style="@style/MovieTextView.Medium"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:text="@string/label_review"
+                        android:visibility="visible"
+                        app:textAllCaps="true" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_review" />
+
+                </LinearLayout>
+
+            </com.lianda.movies.utils.custom.CustomMultiStateView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

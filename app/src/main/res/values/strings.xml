@@ -5,4 +5,20 @@
     <string name="sample_date">11 November 2020</string>
     <string name="action_retry">Ulangi</string>
     <string name="label_oops">Oops..</string>
+    <string name="label_original_language">Original Language</string>
+    <string name="label_status">Status</string>
+    <string name="label_duration">Duration</string>
+    <string name="label_genre">Genre</string>
+    <string name="label_overview">Overview</string>
+    <string name="sample_original_language">English</string>
+    <string name="sample_status">Release</string>
+    <string name="sample_duration">2h1m</string>
+    <string name="sample_genre">Romance, Drama</string>
+    <string name="label_review">Reviews</string>
+    <string name="action_see_all">See All</string>
+    <string name="label_information">Information</string>
+    <string name="label_trailer">Trailer</string>
+    <string name="message_empty_reviews">No Reviews</string>
+    <string name="message_empty_movies">No Movies</string>
+    <string name="label_movie">Movie</string>
 </resources>

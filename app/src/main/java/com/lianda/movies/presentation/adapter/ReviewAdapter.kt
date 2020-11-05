@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lianda.movies.R
-import com.lianda.movies.domain.model.Movie
+import com.lianda.movies.domain.model.Review
 import com.lianda.movies.utils.extentions.loadImage
-import com.lianda.movies.utils.extentions.onSingleClickListener
 import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.item_review.view.*
 
-class MovieAdapter(val context:Context, var data:List<Movie>, val onMovieClicked:((movie: Movie)->Unit)?):
-    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class ReviewAdapter(val context:Context, var data:List<Review>):
+    RecyclerView.Adapter<ReviewAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_movie,parent,false))
+        return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_review,parent,false))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -25,21 +25,15 @@ class MovieAdapter(val context:Context, var data:List<Movie>, val onMovieClicked
     override fun getItemCount() = data.size
 
     inner class MovieViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-        fun bind(data: Movie){
+        fun bind(data: Review){
             with(itemView){
-                imgPoster.loadImage(data.posterPath,pbPoster)
-                tvTitle.text = data.title
-                tvDate.text = data.releaseDate
-                tvVote.text = data.voteAverage.toString()
-
-                onSingleClickListener {
-                    onMovieClicked?.invoke(data)
-                }
+                tvName.text = data.author
+                tvComment.text = data.content
             }
         }
     }
 
-    fun notifyDataAddOrUpdate(newData:List<Movie>){
+    fun notifyDataAddOrUpdate(newData:List<Review>){
         data = newData
         notifyDataSetChanged()
     }

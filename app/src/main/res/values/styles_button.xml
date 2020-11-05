@@ -34,7 +34,7 @@
 
 
 
-    <style name="KecipirButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="MovieButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="strokeColor">@color/colorPrimary</item>
@@ -45,24 +45,24 @@
         <item name="android:padding">@dimen/dimen_15dp</item>
     </style>
 
-    <style name="KecipirButtonOutlined.Medium">
+    <style name="MovieButtonOutlined.Medium">
         <item name="android:minHeight">0dp</item>
         <item name="android:padding">@dimen/dimen_12dp</item>
     </style>
 
-    <style name="KecipirButtonOutlined.Red">
+    <style name="MovieButtonOutlined.Red">
         <item name="strokeColor">#FF5555</item>
         <item name="android:textColor">#FF5555</item>
     </style>
 
-    <style name="KecipirTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="MovieTextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">#15B065</item>
     </style>
 
-    <style name="KecipirTextButton.Primary">
+    <style name="MovieTextButton.Primary">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 

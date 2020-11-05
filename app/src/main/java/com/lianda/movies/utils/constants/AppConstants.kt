@@ -8,4 +8,6 @@ object AppConstants {
 
     const val DATABASE_NAME = "app_database"
 
+    const val KEY_MOVIE = "key_movie"
+
 }
