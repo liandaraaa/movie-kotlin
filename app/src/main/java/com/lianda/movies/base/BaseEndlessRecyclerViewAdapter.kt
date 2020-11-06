@@ -1,7 +1,6 @@
 package com.lianda.movies.base
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,13 +45,6 @@ abstract class BaseEndlessRecyclerViewAdapter<T>(
                         val totalItemCount = layoutManager.itemCount
                         val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
                         val isLastPosition = totalItemCount.minus(1) == lastVisibleItem
-                        Log.d("lotmor", "countItem: $totalItemCount")
-                        Log.d("lotmor", "lastVisiblePosition: $lastVisibleItem")
-                        Log.d("lotmor", "isLastPosition: $isLastPosition")
-                        Log.d("lotmor", "page: $page")
-                        Log.d("lotmor", "totalPage: $totalPage")
-                        Log.d("lotmor", "isLoadMore: $isLoadMoreLoading")
-
                         if (!isLoadMoreLoading && isLastPosition && page < totalPage) {
                             onLoadMoreListener.onLoadMore()
                             isLoadMoreLoading = true
@@ -63,13 +55,11 @@ abstract class BaseEndlessRecyclerViewAdapter<T>(
 
             recyclerView!!.addOnScrollListener(scrollListener as RecyclerView.OnScrollListener)
             field = recyclerView
-            Log.d("LoadMore", "scroll listener set")
         }
 
     fun removeScrollListener() {
         scrollListener?.let {
             recyclerView?.removeOnScrollListener(it)
-            Log.d("LoadMore", "scroll listener removed")
         }
     }
 

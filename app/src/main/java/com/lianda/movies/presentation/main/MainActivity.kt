@@ -1,12 +1,10 @@
 package com.lianda.movies.presentation.main
 
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lianda.movies.R
 import com.lianda.movies.base.BaseActivity
 import com.lianda.movies.base.BaseEndlessRecyclerViewAdapter
 import com.lianda.movies.domain.model.EndlessMovie
-import com.lianda.movies.domain.model.Movie
 import com.lianda.movies.presentation.adapter.MovieAdapter
 import com.lianda.movies.presentation.movie.MovieDetailActivity
 import com.lianda.movies.presentation.viewmodel.MovieViewModel
@@ -98,12 +96,10 @@ class MainActivity : BaseActivity(), BaseEndlessRecyclerViewAdapter.OnLoadMoreLi
             }
             is ResultState.Empty -> {
                 if (isLoadMore) {
-                    Log.d("lotmor", "lotmore empty false")
                     isLoadMore = false
                     movieAdapter?.setLoadMoreProgress(false)
                     movieAdapter?.removeScrollListener()
                 } else {
-                    Log.d("lotmor", "lotmore empty true")
                     movieAdapter?.datas?.clear()
                     msvMovie.showEmptyView(
                         icon = R.drawable.ic_empty,
@@ -117,7 +113,6 @@ class MainActivity : BaseActivity(), BaseEndlessRecyclerViewAdapter.OnLoadMoreLi
     }
 
     override fun onLoadMore() {
-        Log.d("Lotmor", "triggered")
         isLoadMore = true
         movieAdapter?.setLoadMoreProgress(true)
         currentPage += 1

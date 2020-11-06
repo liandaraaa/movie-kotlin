@@ -14,6 +14,7 @@ import com.lianda.movies.presentation.viewmodel.MovieViewModel
 import com.lianda.movies.utils.common.ResultState
 import com.lianda.movies.utils.constants.AppConstants.KEY_MOVIE
 import com.lianda.movies.utils.extentions.*
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -65,7 +66,7 @@ class MovieDetailActivity : BaseActivity() {
             imgMovie.loadImage(posterPath, pbPoster)
             tvTitle.text = title
             tvVote.text = voteAverage.toString()
-            ratMovie.rating = voteAverage.toFloat()
+            ratMovie.rating = voteAverage.toFloat().div(2)
             tvDate.text = releaseDate
         }
     }
@@ -81,13 +82,21 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private fun showVideoTrailer(data: Video) {
-        lifecycle.addObserver(pvTrailer)
+        if(data.youtubeKey.isNotEmpty()){
+            lifecycle.addObserver(pvTrailer)
+            pvTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.loadVideo(data.youtubeKey, 0f)
+                }
 
-        pvTrailer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(data.youtubeKey, 0f)
-            }
-        })
+                override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
+                    super.onError(youTubePlayer, error)
+                    onVideoTrailerError()
+                }
+            })
+        }else{
+           onVideoTrailerEmpty()
+        }
     }
 
     private fun showReviews(data: List<Review>) {
@@ -132,15 +141,7 @@ class MovieDetailActivity : BaseActivity() {
                 showMovieDetail(result.data)
             }
             is ResultState.Error -> {
-                msvMovieDetail.showErrorView(
-                    icon = R.drawable.ic_movie_broken,
-                    title = getString(R.string.label_oops),
-                    message = result.throwable.message,
-                    action = getString(R.string.action_retry),
-                    actionListener = {
-                        observeMovieDetail()
-                    }
-                )
+               onMovieDetailError(result.throwable.message.toString())
             }
             is ResultState.Loading -> {
                 msvMovieDetail.showLoadingView()
@@ -155,15 +156,7 @@ class MovieDetailActivity : BaseActivity() {
                 showVideoTrailer(result.data)
             }
             is ResultState.Error -> {
-                msvTrailer.showErrorView(
-                    icon = R.drawable.ic_movie_broken,
-                    title = getString(R.string.label_oops),
-                    message = result.throwable.message,
-                    action = getString(R.string.action_retry),
-                    actionListener = {
-                        observeVideoTrailer()
-                    }
-                )
+                onVideoTrailerError()
             }
             is ResultState.Loading -> {
                 msvTrailer.showLoadingView()
@@ -178,27 +171,67 @@ class MovieDetailActivity : BaseActivity() {
                 showReviews(result.data)
             }
             is ResultState.Error -> {
-                msvReview.showErrorView(
-                    icon = R.drawable.ic_movie_broken,
-                    title = getString(R.string.label_oops),
-                    message = result.throwable.message,
-                    action = getString(R.string.action_retry),
-                    actionListener = {
-                        observeReviews()
-                    }
-                )
+               onReviewsError(result.throwable.message.toString())
             }
             is ResultState.Loading -> {
                 msvReview.showLoadingView()
             }
             is ResultState.Empty -> {
-                msvReview.showEmptyView(
-                    icon = R.drawable.ic_empty,
-                    title = getString(R.string.label_oops),
-                    message = getString(R.string.message_empty_reviews)
-                )
+                onReviewsEmpty()
             }
         }
+    }
+
+    private fun onReviewsEmpty() {
+        msvReview.showEmptyView(
+            icon = R.drawable.ic_empty,
+            title = getString(R.string.label_oops),
+            message = getString(R.string.message_empty_reviews)
+        )
+    }
+
+    private fun onReviewsError(message:String) {
+        msvReview.showErrorView(
+            icon = R.drawable.ic_movie_broken,
+            title = getString(R.string.label_oops),
+            message = message,
+            action = getString(R.string.action_retry),
+            actionListener = {
+                observeReviews()
+            }
+        )
+    }
+
+    private fun onMovieDetailError(message:String) {
+        msvMovieDetail.showErrorView(
+            icon = R.drawable.ic_movie_broken,
+            title = getString(R.string.label_oops),
+            message = message,
+            action = getString(R.string.action_retry),
+            actionListener = {
+                observeMovieDetail()
+            }
+        )
+    }
+
+    private fun onVideoTrailerError(){
+        msvTrailer.showErrorView(
+            icon = R.drawable.ic_movie_broken,
+            title = getString(R.string.label_oops),
+            message = getString(R.string.message_error_founded),
+            action = getString(R.string.action_retry),
+            actionListener = {
+                observeVideoTrailer()
+            }
+        )
+    }
+
+    private fun onVideoTrailerEmpty(){
+        msvTrailer.showEmptyView(
+            icon = R.drawable.ic_empty,
+            title = getString(R.string.label_oops),
+            message = getString(R.string.message_empty_videos)
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
