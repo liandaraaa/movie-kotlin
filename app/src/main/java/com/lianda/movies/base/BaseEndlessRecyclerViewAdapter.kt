@@ -73,12 +73,6 @@ abstract class BaseEndlessRecyclerViewAdapter<T>(
         }
     }
 
-    fun notifyUpdateChanged(newDatas: List<T>) {
-        datas.clear()
-        datas.addAll(newDatas)
-        notifyDataSetChanged()
-    }
-
     fun clear(){
         datas.clear()
         notifyDataSetChanged()

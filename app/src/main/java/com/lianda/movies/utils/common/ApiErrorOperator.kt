@@ -22,11 +22,3 @@ object ApiErrorOperator {
     }
 
 }
-
-data class ApiError(
-    val code: String = "",
-    val message: String = "",
-    val status: Boolean = false
-){
-    constructor(): this("","",false)
-}

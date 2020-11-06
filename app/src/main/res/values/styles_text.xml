@@ -25,11 +25,19 @@
         <item name="fontFamily">@font/mukta_vaani_bold</item>
     </style>
 
+    <style name="MovieTextView.Header.Bold">
+        <item name="fontFamily">@font/mukta_vaani_bold</item>
+    </style>
+
     <style name="MovieTextView.SubHeader.SemiBold">
         <item name="fontFamily">@font/mukta_vaani_semibold</item>
     </style>
 
     <style name="MovieTextView.Medium">
+        <item name="fontFamily">@font/mukta_vaani_medium</item>
+    </style>
+
+    <style name="MovieTextView.SubHeader.Medium">
         <item name="fontFamily">@font/mukta_vaani_medium</item>
     </style>
 

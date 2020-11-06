@@ -1,14 +1,12 @@
 package com.lianda.movies.data.api.interceptor
 
-import android.app.Application
 import com.lianda.movies.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 
-class HeaderInterceptor (
-    private val application: Application):Interceptor{
+class HeaderInterceptor:Interceptor{
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

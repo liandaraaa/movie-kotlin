@@ -1,5 +1,6 @@
 package com.lianda.movies.domain.usecase.contract
 
+import androidx.lifecycle.LiveData
 import com.lianda.movies.domain.model.EndlessMovie
 import com.lianda.movies.domain.model.Movie
 import com.lianda.movies.domain.model.Review
@@ -8,9 +9,9 @@ import com.lianda.movies.utils.common.ResultState
 
 interface MovieUseCase {
 
-    suspend fun fetchMovies(page: Int): ResultState<EndlessMovie>
-    suspend fun fetchMovieDetail(movieId: Int): ResultState<Movie>
-    suspend fun fetchVideoTrailer(movieId: Int): ResultState<Video>
-    suspend fun fetchReviews(movieId: Int): ResultState<List<Review>>
+    fun fetchMovies(page: Int): LiveData<ResultState<EndlessMovie>>
+    fun fetchMovieDetail(movieId: Int): LiveData<ResultState<Movie>>
+    fun fetchVideoTrailer(movieId: Int): LiveData<ResultState<Video>>
+    fun fetchReviews(movieId: Int):LiveData<ResultState<List<Review>>>
 
 }

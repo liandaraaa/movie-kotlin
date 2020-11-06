@@ -9,7 +9,7 @@
         android:id="@+id/tvName"
         style="@style/MovieTextView.Primary.SemiBold"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
         android:text="@string/sample_movie_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

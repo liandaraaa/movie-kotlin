@@ -93,6 +93,8 @@ class MainActivity : BaseActivity(), BaseEndlessRecyclerViewAdapter.OnLoadMoreLi
             }
             is ResultState.Loading -> {
                 msvMovie.showLoadingView()
+                isLoadMore = true
+                movieAdapter?.setLoadMoreProgress(true)
             }
             is ResultState.Empty -> {
                 if (isLoadMore) {
