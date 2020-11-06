@@ -1,7 +1,8 @@
 # Movie App
 
 A simple application to show a discover movies in the whole world
-\n source : https://www.themoviedb.org/
+
+source : https://www.themoviedb.org/
 
 # Getting Started
 
